@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -62,12 +63,15 @@ public class NekosEnchantedBooks {
             return enchantmentMap.getOrDefault(key, 0.0F);
         });
     }
-  
+
     private void gatherData(GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();
+        PackOutput output = gen.getPackOutput();
 
         if (event.includeClient()) {
-            gen.addProvider(true, new ModItemModelProvider(gen, event.getExistingFileHelper()));
+            gen.addProvider(true, new ModItemModelProvider(output, event.getExistingFileHelper()));
+            		
+      
         }
     }
 }
